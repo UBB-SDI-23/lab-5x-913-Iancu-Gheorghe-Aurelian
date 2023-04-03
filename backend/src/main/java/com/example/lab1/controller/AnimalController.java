@@ -52,11 +52,6 @@ public class AnimalController {
         return animalService.updateAnimal(animal, id);
     }
 
-/*    @PutMapping("/update/animal{animalId}/shelter{shelterId}")
-    public Shelter updateShelter(@PathVariable Long animalId, @PathVariable Long shelterId){
-        return animalService.updateShelter(animalId, shelterId);
-    }*/
-
     //delete animal with id = id
     @DeleteMapping("/delete/{id}")
     public void deleteAnimal(@PathVariable("id") Long id){
