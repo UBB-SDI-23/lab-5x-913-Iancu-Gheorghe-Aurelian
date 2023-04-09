@@ -19,6 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 export const SheltersShowAll = () => {
     const[loading, setLoading] = useState(true);
@@ -57,6 +58,11 @@ export const SheltersShowAll = () => {
                                     <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/save`}>
                                         <Tooltip title="Add a new shelter" arrow>
                                             <AddIcon style={{color:"black", fontSize:"20px"}} />
+                                        </Tooltip>
+                                    </IconButton>
+                                    <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/statistics-countAnimal`}>
+                                        <Tooltip title="Get shelters ordered by number of animals." arrow>
+                                            <FilterAltIcon style={{color:"black", fontSize:"20px"}} />
                                         </Tooltip>
                                     </IconButton></TableCell>
                             </TableRow>

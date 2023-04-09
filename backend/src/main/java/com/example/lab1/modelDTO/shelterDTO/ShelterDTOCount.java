@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ShelterDTOCount {
-    private String animalName;
+    private String shelterName;
     private Long count;
 }

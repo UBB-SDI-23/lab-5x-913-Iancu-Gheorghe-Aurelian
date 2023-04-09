@@ -10,6 +10,7 @@ import { ShelterDetails } from "./components/shelters/ShelterDetails";
 import { ShelterAdd } from "./components/shelters/ShelterAdd";
 import { ShelterDelete } from "./components/shelters/ShelterDelete";
 import { ShelterUpdate } from "./components/shelters/ShelterUpdate";
+import { ShelterStatistics } from "./components/shelters/ShelterAnimalStatistic";
 
 
 
@@ -29,9 +30,9 @@ function App() {
                       <Route path="/shelter/:shelterId" element={<ShelterDetails />}/>
                       <Route path="/shelter/delete/:shelterId" element={<ShelterDelete />} />
                       <Route path="/shelter/update/:shelterId" element={<ShelterUpdate />} />
+                      <Route path="/shelter/statistics-countAnimal" element={<ShelterStatistics />} />
                       {/* animal routes */}
                       <Route path="/animal" element={<AnimalsShowAll />}/>
-                      
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
               </Routes>
       </Router>
