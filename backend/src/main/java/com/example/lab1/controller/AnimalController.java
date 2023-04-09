@@ -27,7 +27,7 @@ public class AnimalController {
     }
 
     //get animal by id with all the info about its shelter
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public Optional<Animal> findAnimalById(@PathVariable("id") Long id){
         return animalService.findAnimalById(id);
     }

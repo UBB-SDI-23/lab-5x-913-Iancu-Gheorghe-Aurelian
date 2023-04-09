@@ -38,7 +38,7 @@ public class ShelterController {
     }
 
     //get shelter by id with all the animals that live there
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public ShelterDTOById findShelterById(@PathVariable("id") Long id){
         return shelterService.findShelterById(id);
     }

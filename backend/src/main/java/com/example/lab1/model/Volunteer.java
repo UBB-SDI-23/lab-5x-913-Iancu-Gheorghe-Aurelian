@@ -1,6 +1,4 @@
 package com.example.lab1.model;
-
-import com.example.lab1.modelDTO.volunteerDTO.VolunteerVolunteeringDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
