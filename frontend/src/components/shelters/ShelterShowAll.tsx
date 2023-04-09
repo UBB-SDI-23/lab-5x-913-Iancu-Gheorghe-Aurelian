@@ -20,6 +20,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import SortIcon from '@mui/icons-material/Sort';
 
 export const SheltersShowAll = () => {
     const[loading, setLoading] = useState(true);
@@ -32,6 +33,20 @@ export const SheltersShowAll = () => {
     }, []);
 
     console.log(shelters);
+
+    const sortShelters = () => {
+        const sortedShelters = [...shelters].sort((a: Shelter, b: Shelter) => {
+            if (a.capacity < b.capacity) {
+                return -1;
+            }
+            if (a.capacity > b.capacity) {
+                return 1;
+            }
+            return 0;
+        })
+        console.log(sortedShelters);
+        setShelters(sortedShelters);
+    }
 
     return (
 
@@ -52,7 +67,15 @@ export const SheltersShowAll = () => {
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight:'bold'}}>Name</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Address</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Number of volunteers</TableCell>
-                                <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Capacity</TableCell>
+                                <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>
+                                    Capacity
+                                <IconButton sx={{color:"black", paddingLeft:2, fontSize:"20px", width:"20px", '&:focus': {
+                                            outline: "none"
+                                        } }} onClick={sortShelters}>
+                                        <Tooltip title="Sort" arrow>
+                                            <SortIcon style={{color:"black", fontSize:"20px"}} />
+                                        </Tooltip>
+                                    </IconButton></TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>City</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Operations
                                     <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/save`}>
