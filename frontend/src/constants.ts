@@ -1,1 +1,1 @@
-export const BACKEND_API_URL = "http://13.53.199.180"
+export const BACKEND_API_URL = "http://main--animal-shelter-sdi.netlify.app/"
