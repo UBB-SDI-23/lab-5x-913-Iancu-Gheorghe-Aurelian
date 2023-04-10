@@ -45,9 +45,9 @@ public class ShelterServiceTest {
         List<ShelterDTOCount> result = this.shelterService.getSheltersOrderedByNumberOfAnimalsAsc();
 
         assertEquals(3, result.size());
-        assertEquals("name1", result.get(0).getAnimalName());
-        assertEquals("name2", result.get(1).getAnimalName());
-        assertEquals("name3", result.get(2).getAnimalName());
+        assertEquals("name1", result.get(0).getShelterName());
+        assertEquals("name2", result.get(1).getShelterName());
+        assertEquals("name3", result.get(2).getShelterName());
     }
 
     @Test
