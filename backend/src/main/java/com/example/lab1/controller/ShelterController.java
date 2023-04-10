@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/shelter")
+@RequestMapping("/api/shelter")
 public class ShelterController {
     private final ShelterService shelterService;
 

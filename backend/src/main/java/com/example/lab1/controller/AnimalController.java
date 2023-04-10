@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/animal")
+@RequestMapping("/api/animal")
 public class AnimalController {
     private final AnimalService animalService;
 

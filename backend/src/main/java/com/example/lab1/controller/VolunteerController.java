@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/volunteer")
+@RequestMapping("/api/volunteer")
 public class VolunteerController {
     private final VolunteerService volunteerService;
 
