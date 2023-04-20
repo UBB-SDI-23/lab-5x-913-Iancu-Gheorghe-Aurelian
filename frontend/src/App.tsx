@@ -11,6 +11,7 @@ import { ShelterAdd } from "./components/shelters/ShelterAdd";
 import { ShelterDelete } from "./components/shelters/ShelterDelete";
 import { ShelterUpdate } from "./components/shelters/ShelterUpdate";
 import { ShelterStatistics } from "./components/shelters/ShelterAnimalStatistic";
+import { VolunteersShowAll } from "./components/volunteers/VolunteerShowAll";
 
 
 
@@ -34,6 +35,9 @@ function App() {
                       {/* animal routes */}
                       <Route path="/animal" element={<AnimalsShowAll />}/>
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
+
+                      {/* volunteer routes */}            
+                      <Route path="/volunteer" element={<VolunteersShowAll />}/>
               </Routes>
       </Router>
     </React.Fragment>
