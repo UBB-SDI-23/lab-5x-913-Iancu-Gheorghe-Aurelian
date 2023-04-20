@@ -10,19 +10,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 
 
-export const ShelterDetails = () => {
+export const VolunteerDetails = () => {
 
     const { volunteerId } = useParams();
     const [volunteer, setVolunteer] = useState<Volunteer>();
 
     useEffect(() => {
-        const fetchShelter = async () => {
+        const fetchVolunteer = async () => {
             const response = await fetch(`${BACKEND_API_URL}/volunteer/${volunteerId}`);
             const volunteer = await response.json();
             setVolunteer(volunteer);
             console.log(volunteer);
         };
-        fetchShelter();
+        fetchVolunteer();
     }, [volunteerId]);
 
     return (
