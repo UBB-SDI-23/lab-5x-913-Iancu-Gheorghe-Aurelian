@@ -25,7 +25,7 @@ function App() {
                       <Route path="/" element={<AppHome />} />
 
                       {/* shelter routes */}
-                      <Route path="/api/shelter" element={<SheltersShowAll />}/>
+                      <Route path="/shelter" element={<SheltersShowAll />}/>
                       <Route path="/shelter/save" element={<ShelterAdd />} />
                       <Route path="/shelter/:shelterId" element={<ShelterDetails />}/>
                       <Route path="/shelter/delete/:shelterId" element={<ShelterDelete />} />
