@@ -90,14 +90,14 @@ export const VolunteerUpdate = () => {
 
             {loading && <CircularProgress/>}
 
-            {!loading && !volunteer && <div>Shelter not found</div>}
+            {!loading && !volunteer && <div>Volunteer not found</div>}
 
             {!loading && (
                 <Card>
                     <CardContent>
                         <form onSubmit={updateVolunteer}>
                         <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBlockEnd:3}}>
-                            <IconButton component={Link} to={`/shelter`} sx={{mr: 2}}>
+                            <IconButton component={Link} to={`/volunteer`} sx={{mr: 2}}>
                                 <ArrowBackIcon/>
                             </IconButton>
                             <Typography variant="h6" sx={{flexGrow: 1, textAlign: 'center', color:'black'}}>
@@ -138,7 +138,7 @@ export const VolunteerUpdate = () => {
 
                         <TextField style={{color:"#2471A3", fontWeight:'bold'}}
                                    id="phone"
-                                   label="Phone"
+                                   label="Telephone"
                                    variant="outlined"
                                    fullWidth
                                    sx={{ mb: 2 }}

@@ -16,6 +16,8 @@ import { VolunteerAdd } from "./components/volunteers/VolunteerAdd";
 import { VolunteerDetails } from "./components/volunteers/VolunteerDetails";
 import { VolunteerDelete } from "./components/volunteers/VolunteerDelete";
 import { VolunteerUpdate } from "./components/volunteers/VolunteerUpdate";
+import { AnimalFilter } from "./components/animals/AnimalFilter";
+import { AnimalDelete } from "./components/animals/AnimalDelete";
 
 
 
@@ -39,6 +41,8 @@ function App() {
                       {/* animal routes */}
                       <Route path="/animal" element={<AnimalsShowAll />}/>
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
+                      <Route path="/animal/filter/:weight" element={<AnimalFilter />} />
+                      <Route path="/animal/delete/:animalId" element={<AnimalDelete />} />
 
                       {/* volunteer routes */}            
                       <Route path="/volunteer" element={<VolunteerShowAll />}/>

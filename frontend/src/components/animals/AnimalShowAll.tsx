@@ -19,6 +19,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import TextField from "@mui/material/TextField";
+import Box from '@mui/material/Box';
+
+
 
 export const AnimalsShowAll = () => {
     const[loading, setLoading] = useState(true);
@@ -31,6 +36,8 @@ export const AnimalsShowAll = () => {
     }, []);
 
     console.log(animals);
+
+    const[weight, setWeight] = useState(0);
 
     return (
 
@@ -58,7 +65,26 @@ export const AnimalsShowAll = () => {
                                         <Tooltip title="Add a new animal" arrow>
                                             <AddIcon style={{color:"black", fontSize:"20px"}} />
                                         </Tooltip>
-                                    </IconButton></TableCell>
+                                    </IconButton>
+                                    <Box sx={{display: 'inline-flex'}}>
+                                        <IconButton 
+                                        component={Link} 
+                                        sx={{ mr: 3 }} 
+                                        to={`/animal/filter/${weight}`}
+                                        onClick={() => setWeight(0)}
+                                        >
+                                            <Tooltip title="Get animals with weight higher than a given weight." arrow>
+                                            <FilterAltIcon style={{color:"black", fontSize:"20px"}} />
+                                            </Tooltip>
+                                        </IconButton>
+                                        <TextField 
+                                        label="Enter weight" 
+                                        variant="outlined" 
+                                        size="small" 
+                                        value={weight}
+                                        onChange={(event) => setWeight(Number(event.target.value))}/>
+                                    </Box>
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -77,13 +103,15 @@ export const AnimalsShowAll = () => {
                                             <VisibilityIcon  style={{color:"black", fontSize:"20px"}}/>
                                         </IconButton>
 
-                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/${animal.animalId}/edit`}>
+                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/update/${animal.animalId}`}>
                                             <EditIcon sx={{ color: "navy" }}/>
                                         </IconButton>
 
-                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/${animal.animalId}/delete`}>
+                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/delete/${animal.animalId}`}>
                                             <DeleteIcon sx={{ color: "darkred" }} />
                                         </IconButton>
+
+                                        
                                     </TableCell>
                                 </TableRow>
                             ))}

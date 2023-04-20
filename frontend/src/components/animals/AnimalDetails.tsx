@@ -43,11 +43,11 @@ export const AnimalDetails = () => {
                 </CardContent>
 
                 <CardActions>
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/${animalId}/update`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/update/${animalId}`}>
                         <EditIcon sx={{ color: "navy" }}/>
                     </IconButton>
 
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/${animalId}/delete`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/animal/delete/${animalId}`}>
                         <DeleteIcon sx={{ color: "darkred" }} />
                     </IconButton>
                 </CardActions>
