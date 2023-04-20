@@ -41,7 +41,7 @@ public class VolunteerController {
     }
 
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/{id}")
     public VolunteerDTO_forOne findVolunteerById(@PathVariable("id") Long id){
         return this.convertToReaderDTO_forOne(this.volunteerService.findVolunteerById(id));
     }

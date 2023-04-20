@@ -56,16 +56,12 @@ export const VolunteerShowAll = () => {
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Telephone</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Nationality</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Operations
-                                    <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/save`}>
-                                        <Tooltip title="Add a new shelter" arrow>
+                                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/save`}>
+                                        <Tooltip title="Add a new volunteer" arrow>
                                             <AddIcon style={{color:"black", fontSize:"20px"}} />
                                         </Tooltip>
                                     </IconButton>
-                                    <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/statistics-countAnimal`}>
-                                        <Tooltip title="Get shelters ordered by number of animals." arrow>
-                                            <FilterAltIcon style={{color:"black", fontSize:"20px"}} />
-                                        </Tooltip>
-                                    </IconButton></TableCell>
+                                    </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

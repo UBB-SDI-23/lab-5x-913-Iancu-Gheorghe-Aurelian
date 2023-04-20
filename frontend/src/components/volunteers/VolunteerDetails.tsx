@@ -1,8 +1,8 @@
 import {Box, Button, Card, CardActions, CardContent, Container, IconButton, Tooltip, Typography} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Volunteer } from "../../models/Volunteer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Volunteer } from "../../models/Volunteer";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {BACKEND_API_URL} from "../../constants";
@@ -30,24 +30,22 @@ export const VolunteerDetails = () => {
             <Card style={{backgroundColor:"whitesmoke"}}>
                 <CardContent>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', paddingRight:3}}>
-                        <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter`}>
+                        <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer`}>
                             <ArrowBackIcon />
                         </IconButton>{" "}
                         <h2 style={{textAlign:"left", fontWeight:'bold'}}>{volunteer?.firstName} {volunteer?.lastName}</h2>
                     </Box>
-
-                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Address: {volunteer?.email}</p>
-                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Number of volunteers: {volunteer?.phone}</p>
-                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Capacity: {volunteer?.nationality}</p>
-                    
+                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Email: {volunteer?.email}</p>
+                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Telephone: {volunteer?.phone}</p>
+                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Nationality: {volunteer?.nationality}</p>
                 </CardContent>
 
                 <CardActions>
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/update/${volunteerId}`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteerId}/update`}>
                         <EditIcon sx={{ color: "navy" }}/>
                     </IconButton>
 
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/delete/${volunteerId}`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteerId}/delete`}>
                         <DeleteIcon sx={{ color: "darkred" }} />
                     </IconButton>
                 </CardActions>
