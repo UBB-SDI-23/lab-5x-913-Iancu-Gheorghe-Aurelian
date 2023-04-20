@@ -22,7 +22,7 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
 
-export const VolunteersShowAll = () => {
+export const VolunteerShowAll = () => {
     const[loading, setLoading] = useState(true);
     const[volunteers, setVoluteers] = useState([]);
 
@@ -80,15 +80,15 @@ export const VolunteersShowAll = () => {
                                     <TableCell align="center">{volunteer.phone}</TableCell>
                                     <TableCell align="center">{volunteer.nationality}</TableCell> 
                                     <TableCell align="center">
-                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/${volunteer.volunteerId}`}>
+                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteer.volunteerId}`}>
                                             <VisibilityIcon  style={{color:"black", fontSize:"20px"}}/>
                                         </IconButton>
 
-                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/update/${volunteer.volunteerId}`}>
+                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/update/${volunteer.volunteerId}`}>
                                             <EditIcon sx={{ color: "navy" }}/>
                                         </IconButton>
 
-                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/shelter/delete/${volunteer.volunteerId}`}>
+                                        <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/delete/${volunteer.volunteerId}`}>
                                             <DeleteIcon sx={{ color: "darkred" }} />
                                         </IconButton>
                                     </TableCell>
