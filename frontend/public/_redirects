@@ -1,2 +1,0 @@
-/api/* http://localhost/api/:splat 200!
-/* /index.html 200
