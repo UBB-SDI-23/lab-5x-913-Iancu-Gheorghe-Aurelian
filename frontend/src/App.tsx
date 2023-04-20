@@ -11,7 +11,9 @@ import { ShelterAdd } from "./components/shelters/ShelterAdd";
 import { ShelterDelete } from "./components/shelters/ShelterDelete";
 import { ShelterUpdate } from "./components/shelters/ShelterUpdate";
 import { ShelterStatistics } from "./components/shelters/ShelterAnimalStatistic";
-import { VolunteersShowAll } from "./components/volunteers/VolunteerShowAll";
+import { VolunteerShowAll } from "./components/volunteers/VolunteerShowAll";
+import { VolunteerAdd } from "./components/volunteers/VolunteerAdd";
+import { VolunteerDetails } from "./components/volunteers/VolunteerDetails";
 
 
 
@@ -37,7 +39,11 @@ function App() {
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
 
                       {/* volunteer routes */}            
-                      <Route path="/volunteer" element={<VolunteersShowAll />}/>
+                      <Route path="/volunteer" element={<VolunteerShowAll />}/>
+                      <Route path="/volunteer/save" element={<VolunteerAdd />} />
+                      <Route path="/volunteer/:shelterId" element={<VolunteerDetails />}/>
+                      {/* <Route path="/volunteer/delete/:shelterId" element={<VolunteerDelete />} />
+                      <Route path="/volunteer/update/:shelterId" element={<VolunteerUpdate />} /> */}
               </Routes>
       </Router>
     </React.Fragment>
