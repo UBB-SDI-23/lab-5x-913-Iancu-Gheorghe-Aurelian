@@ -41,11 +41,11 @@ export const VolunteerDetails = () => {
                 </CardContent>
 
                 <CardActions>
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteerId}/update`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/update/${volunteerId}`}>
                         <EditIcon sx={{ color: "navy" }}/>
                     </IconButton>
 
-                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteerId}/delete`}>
+                    <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/delete/${volunteerId}`}>
                         <DeleteIcon sx={{ color: "darkred" }} />
                     </IconButton>
                 </CardActions>

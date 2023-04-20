@@ -14,6 +14,8 @@ import { ShelterStatistics } from "./components/shelters/ShelterAnimalStatistic"
 import { VolunteerShowAll } from "./components/volunteers/VolunteerShowAll";
 import { VolunteerAdd } from "./components/volunteers/VolunteerAdd";
 import { VolunteerDetails } from "./components/volunteers/VolunteerDetails";
+import { VolunteerDelete } from "./components/volunteers/VolunteerDelete";
+import { VolunteerUpdate } from "./components/volunteers/VolunteerUpdate";
 
 
 
@@ -41,9 +43,9 @@ function App() {
                       {/* volunteer routes */}            
                       <Route path="/volunteer" element={<VolunteerShowAll />}/>
                       <Route path="/volunteer/save" element={<VolunteerAdd />} />
-                      <Route path="/volunteer/:volunteerId" element={<VolunteerDetails />} />
-                      {/* <Route path="/volunteer/delete/:shelterId" element={<VolunteerDelete />} />
-                      <Route path="/volunteer/update/:shelterId" element={<VolunteerUpdate />} /> */}
+                      <Route path="/volunteer/:volunteerId" element={<VolunteerDetails />}/>
+                      <Route path="/volunteer/delete/:volunteerId" element={<VolunteerDelete />} />
+                      <Route path="/volunteer/update/:volunteerId" element={<VolunteerUpdate />} />
               </Routes>
       </Router>
     </React.Fragment>
