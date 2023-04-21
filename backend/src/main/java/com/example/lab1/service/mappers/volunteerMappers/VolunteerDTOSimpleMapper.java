@@ -15,7 +15,7 @@ public class VolunteerDTOSimpleMapper implements Function<Volunteer, VolunteerDT
                 volunteer.getLastName(),
                 volunteer.getEmail(),
                 volunteer.getPhone(),
-                volunteer.getNationality()
+                volunteer.getCountry()
         );
     }
 }

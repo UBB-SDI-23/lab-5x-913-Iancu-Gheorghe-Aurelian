@@ -35,7 +35,7 @@ public class Volunteer {
     private Long phone;
 
     @Column
-    private String nationality;
+    private String country;
 
 
     @OneToMany(mappedBy = "volunteer")

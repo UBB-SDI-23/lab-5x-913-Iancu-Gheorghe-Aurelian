@@ -40,7 +40,7 @@ export const VolunteerAdd = () => {
         lastName:"",
         email:"",
         phone:0,
-        nationality:""
+        country:""
     });
 
     const addVolunteer = async (event: { preventDefault: () => void }) => {
@@ -121,12 +121,12 @@ export const VolunteerAdd = () => {
                         />
 
                         <TextField style={{color:"#2471A3", fontWeight:'bold'}}
-                                   id="nationality"
-                                   label="Nationality"
+                                   id="country"
+                                   label="Country"
                                    variant="outlined"
                                    fullWidth
                                    sx={{ mb: 2 }}
-                                   onChange={(event) => setVolunteer({ ...volunteer, nationality: event.target.value })}
+                                   onChange={(event) => setVolunteer({ ...volunteer, country: event.target.value })}
                         />
                     </form>
                 </CardContent>

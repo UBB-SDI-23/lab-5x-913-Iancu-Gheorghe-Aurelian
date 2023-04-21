@@ -4,5 +4,5 @@ export interface Volunteer{
     lastName: string;
     email: string;
     phone: number;
-    nationality: string;
+    country: string;
 }

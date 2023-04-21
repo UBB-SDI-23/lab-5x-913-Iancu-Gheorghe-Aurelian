@@ -43,6 +43,10 @@ public class Shelter {
     @Column
     private String city;
 
+    @Column(length = 2000)
+    @NotEmpty
+    private String description;
+
 
     @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE)
     @JsonIgnore

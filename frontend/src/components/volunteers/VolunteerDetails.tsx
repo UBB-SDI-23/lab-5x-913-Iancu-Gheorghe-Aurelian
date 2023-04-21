@@ -37,7 +37,7 @@ export const VolunteerDetails = () => {
                     </Box>
                     <p  style={{textAlign:"left", fontWeight:'bold'}}>Email: {volunteer?.email}</p>
                     <p  style={{textAlign:"left", fontWeight:'bold'}}>Telephone: {volunteer?.phone}</p>
-                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Nationality: {volunteer?.nationality}</p>
+                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Country: {volunteer?.country}</p>
                 </CardContent>
 
                 <CardActions>

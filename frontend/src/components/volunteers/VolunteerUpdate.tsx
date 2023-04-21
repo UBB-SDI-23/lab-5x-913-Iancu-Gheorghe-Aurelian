@@ -42,7 +42,7 @@ export const VolunteerUpdate = () => {
         lastName:"",
         email:"",
         phone:1,
-        nationality:""
+        country:""
     });
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const VolunteerUpdate = () => {
                 lastName: volunteer.lastName,
                 email: volunteer.email,
                 phone: volunteer.phone,
-                nationality: volunteer.natioanlity
+                country: volunteer.country
             })
             setLoading(false);
             console.log(volunteer);
@@ -151,7 +151,7 @@ export const VolunteerUpdate = () => {
                                    variant="outlined"
                                    fullWidth
                                    sx={{ mb: 2 }}
-                                   onChange={(event) => setVolunteer({ ...volunteer, nationality: event.target.value })}
+                                   onChange={(event) => setVolunteer({ ...volunteer, country: event.target.value })}
                         />
 
                         </form>

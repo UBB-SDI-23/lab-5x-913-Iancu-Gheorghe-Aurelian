@@ -19,8 +19,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from "@mui/icons-material/DeleteForever";
 import AddIcon from "@mui/icons-material/Add";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import SortIcon from '@mui/icons-material/Sort';
 
 export const VolunteerShowAll = () => {
     const[loading, setLoading] = useState(true);
@@ -54,7 +52,7 @@ export const VolunteerShowAll = () => {
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Last Name</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Email</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Telephone</TableCell>
-                                <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Nationality</TableCell>
+                                <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Country</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Operations
                                     <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/save`}>
                                         <Tooltip title="Add a new volunteer" arrow>
@@ -74,7 +72,7 @@ export const VolunteerShowAll = () => {
                                     <TableCell align="center">{volunteer.lastName}</TableCell>
                                     <TableCell align="center">{volunteer.email}</TableCell>
                                     <TableCell align="center">{volunteer.phone}</TableCell>
-                                    <TableCell align="center">{volunteer.nationality}</TableCell> 
+                                    <TableCell align="center">{volunteer.country}</TableCell> 
                                     <TableCell align="center">
                                         <IconButton component={Link} sx={{ mr: 3 }} to={`/volunteer/${volunteer.volunteerId}`}>
                                             <VisibilityIcon  style={{color:"black", fontSize:"20px"}}/>

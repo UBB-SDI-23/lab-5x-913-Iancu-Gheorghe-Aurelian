@@ -48,7 +48,7 @@ public class VolunteerService {
             oldVolunteer.setLastName(volunteer.getLastName());
             oldVolunteer.setEmail(volunteer.getEmail());
             oldVolunteer.setEmail(volunteer.getEmail());
-            oldVolunteer.setNationality(volunteer.getNationality());
+            oldVolunteer.setCountry(volunteer.getCountry());
             volunteerRepository.save(oldVolunteer);
             return oldVolunteer;
         }
