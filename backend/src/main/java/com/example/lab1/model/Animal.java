@@ -3,10 +3,14 @@ package com.example.lab1.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 
 @Data
@@ -35,10 +39,12 @@ public class Animal {
     private Double weight;
 
     @Column
-    private String dateOfBirth;
+    private String breed;
 
     @Column
-    private String breed;
+    @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
 
     @ManyToOne
     @JoinColumn(name = "shelter_animal_fk", nullable = false)

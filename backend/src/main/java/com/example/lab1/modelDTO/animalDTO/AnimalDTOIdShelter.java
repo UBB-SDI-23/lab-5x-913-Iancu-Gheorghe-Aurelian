@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +15,7 @@ public class AnimalDTOIdShelter {
     private String name;
     private String type;
     private Double weight;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String breed;
     private Long shelterId;
 }
