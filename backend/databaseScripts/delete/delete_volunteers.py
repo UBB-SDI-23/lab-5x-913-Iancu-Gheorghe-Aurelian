@@ -1,15 +1,15 @@
-from databaseScripts.constants import HOST, PORT, DATABASE, USER, PASSWORD, SPECIAL_CHARS, TLDS, EMAIL_DOMAINS
+#from databaseScripts.constants import HOST, PORT, DATABASE, USER, PASSWORD, SPECIAL_CHARS, TLDS, EMAIL_DOMAINS
 import mysql.connector
 
 
 def delete_volunteers():
     conn = mysql.connector.connect(
-        host=HOST,
-        port=PORT,
-        database=DATABASE,
-        user=USER,
-        password=PASSWORD
-    )
+            HOST="127.0.0.1",
+            PORT=3306,
+            DATABASE="animalshelter",
+            USER="debian-sys-maint",
+            PASSWORD="1ZKDyeEnwjHkFTIH"
+        )
 
     try:
         with conn.cursor() as cursor:
