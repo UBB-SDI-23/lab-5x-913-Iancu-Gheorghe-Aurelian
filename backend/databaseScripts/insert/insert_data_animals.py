@@ -7,12 +7,14 @@ from faker import Faker
 
 def insert_data_animals():
     conn = mysql.connector.connect(
-        HOST="localhost"
-        PORT=3306
-        DATABASE="animalshelter"
-        USER="root"
-        PASSWORD="Aurelian2002"
+        HOST="127.0.0.1",
+        PORT=3306,
+        DATABASE="animalshelter",
+        USER="debian-sys-maint",
+        PASSWORD="1ZKDyeEnwjHkFTIH"
     )
+
+
 
     ANIMALS = ["Dog", "Cat", "Rabbit", "Hamster", "Guinea pig", "Bird", "Snake", "Turtle", "Lizard"]
     BREEDS = [
