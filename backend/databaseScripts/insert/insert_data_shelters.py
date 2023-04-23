@@ -1,17 +1,16 @@
 import random
 
-from databaseScripts.constants import HOST, PORT, DATABASE, USER, PASSWORD, SPECIAL_CHARS, TLDS, EMAIL_DOMAINS
 import mysql.connector
 from faker import Faker
 
 
 def insert_data_shelters():
     conn = mysql.connector.connect(
-        host=HOST,
-        port=PORT,
-        database=DATABASE,
-        user=USER,
-        password=PASSWORD
+        HOST="localhost"
+        PORT=3306
+        DATABASE="animalshelter"
+        USER="root"
+        PASSWORD="Aurelian2002"
     )
 
     try:
