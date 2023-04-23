@@ -3,11 +3,11 @@ import mysql.connector
 
 def delete_animals():
     conn = mysql.connector.connect(
-            HOST="127.0.0.1",
-            PORT=3306,
-            DATABASE="animalshelter",
-            USER="debian-sys-maint",
-            PASSWORD="1ZKDyeEnwjHkFTIH"
+            host="127.0.0.1",
+            port=3306,
+            database="animalshelter",
+            user="debian-sys-maint",
+            password="1ZKDyeEnwjHkFTIH"
         )
 
     try:
