@@ -48,11 +48,11 @@ public class Shelter {
     private String description;
 
 
-    @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "shelter", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     @JsonIgnore
     protected List<Animal> animals;
 
-    @OneToMany(mappedBy = "shelter")
+    @OneToMany(mappedBy = "shelter", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Volunteering> volunteerings;
 

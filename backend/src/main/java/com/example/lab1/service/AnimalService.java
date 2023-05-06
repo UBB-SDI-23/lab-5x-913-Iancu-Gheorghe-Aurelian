@@ -8,8 +8,12 @@ import com.example.lab1.modelDTO.animalDTO.AnimalDTOIdShelter;
 import com.example.lab1.repository.AnimalRepository;
 import com.example.lab1.repository.ShelterRepository;
 import com.example.lab1.service.mappers.animalMappers.AnimalDTOIdShelterMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,11 +34,18 @@ public class AnimalService {
 
 
 
-    public List<AnimalDTOIdShelter> findAllAnimals(){
-        return animalRepository.findAll()
-                .stream()
-                .map(animalDTOIdShelterMapper).
-                collect(Collectors.toList());
+    public List<AnimalDTOIdShelter> findAllAnimals(Integer pageNo, Integer pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("animalId"));
+
+        return this.animalRepository.findAll(pageable).getContent().stream().map(
+                animalDTOIdShelterMapper
+        ).collect(Collectors.toList());
+
+
+//        return animalRepository.findAll()
+//                .stream()
+//                .map(animalDTOIdShelterMapper).
+//                collect(Collectors.toList());
     }
 
     public Optional<Animal> findAnimalById(Long id){
@@ -78,8 +89,14 @@ public class AnimalService {
         this.animalRepository.deleteById(id);
     }
 
-    public List<Animal> findByWeightGreaterThan(Double weight){
-        return this.animalRepository.findByWeightGreaterThan(weight);
+    public List<AnimalDTOIdShelter> findByWeightGreaterThan(Double weight, Integer pageNo, Integer pageSize){
+        Pageable pageable = (Pageable) PageRequest.of(pageNo, pageSize, Sort.by("animalId"));
+
+        return this.animalRepository.findByWeightGreaterThan(weight, pageable).
+                getContent()
+                .stream()
+                .map(animalDTOIdShelterMapper)
+                .collect(Collectors.toList());
     }
 
     /*public Shelter updateShelter(Long animalId, Long shelterId) {

@@ -6,11 +6,11 @@ from faker import Faker
 
 def insert_data_volunteers():
     conn = mysql.connector.connect(
-                host="127.0.0.1",
+                host="localhost",
                 port=3306,
-                database="animalshelter",
-                user="debian-sys-maint",
-                password="1ZKDyeEnwjHkFTIH"
+                database="animalshelters",
+                user="root",
+                password="Aurelian2002"
             )
 
     SPECIAL_CHARS = [".", " ", ",", "'"]

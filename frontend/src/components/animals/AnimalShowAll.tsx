@@ -22,12 +22,55 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
+import { Paginator } from "../pagination/pagination";
 
 
 
 export const AnimalsShowAll = () => {
     const[loading, setLoading] = useState(true);
     const[animals, setAnimals] = useState([]);
+    const[page, setPage] = useState(1);
+    const[pageSize, setPageSize] = useState(25);
+    const[totalRows, setTotalRows] = useState(0);
+    const crt = (page - 1) * pageSize + 1;
+
+    const [isLastPage, setIsLastPage] = useState(false);
+
+    const setCurrentPage = (newPage: number) => {
+        setPage(newPage);
+    }
+
+    const goToNextPage = () => {
+        if (isLastPage) {
+            return;
+        }
+
+        setPage(page + 1);
+    }
+
+    const goToPrevPage = () => {
+        if(page === 1){
+            return;
+        }
+
+        setPage(page - 1);
+    }
+
+    const fetchAnimals = async () => {
+        setLoading(true);
+        const response = await fetch(
+            `${BACKEND_API_URL}/animal/getAll`
+        );
+        const { count, next, previous, results } = await response.json();
+        setAnimals(results);
+        setTotalRows(count);
+        setIsLastPage(!next);
+        setLoading(false);
+    };
+        useEffect(() => {
+            fetchAnimals();
+        }, [page]);
+
 
     useEffect(() => {
         fetch(`${BACKEND_API_URL}/animal/getAll`)
@@ -49,7 +92,7 @@ export const AnimalsShowAll = () => {
             {!loading && animals.length == 0 && <div>No animals found</div>}
 
             {!loading && animals.length > 0 && (
-
+            <>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 800 }} aria-label="simple table" style={{backgroundColor:"whitesmoke"}}>
                         <TableHead>
@@ -118,6 +161,18 @@ export const AnimalsShowAll = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
+                <Paginator
+                        rowsPerPage={pageSize}
+                        totalRows={totalRows}
+                        currentPage={page}
+                        isFirstPage={page === 1}
+                        isLastPage={isLastPage}
+                        setPage={setCurrentPage}
+                        goToNextPage={goToNextPage}
+                        goToPrevPage={goToPrevPage}
+                    />
+                </>
             )
             }
         </Container>

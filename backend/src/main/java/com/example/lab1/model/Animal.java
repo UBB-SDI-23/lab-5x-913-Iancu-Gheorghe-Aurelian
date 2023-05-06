@@ -46,7 +46,7 @@ public class Animal {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_animal_fk", nullable = false)
     private Shelter shelter;
 
