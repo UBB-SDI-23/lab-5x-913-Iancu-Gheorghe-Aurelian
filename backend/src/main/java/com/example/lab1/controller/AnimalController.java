@@ -26,12 +26,17 @@ public class AnimalController {
 
     //get all animals only with the id of their shelter
     @GetMapping("/getAll")
-    ResponseEntity<List<AnimalDTOIdShelter>> findAllAnimals(
+    ResponseEntity<List<AnimalDTOIdShelter>> findAllAnimals(@RequestParam(required = false) Double minWeight,
                                                             @RequestParam(defaultValue = "0") Integer pageNo,
                                                             @RequestParam(defaultValue = "25") Integer pageSize){
+        if(minWeight == null){
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.animalService.findAllAnimals(pageNo, pageSize));
+        }
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(this.animalService.findAllAnimals(pageNo, pageSize));
+                .body(this.animalService.findByWeightGreaterThan(minWeight, pageNo, pageSize));
     }
 
     //get animal by id with all the info about its shelter
@@ -66,11 +71,9 @@ public class AnimalController {
         animalService.deleteAnimal(id);
     }
 
-    //get only the animals with the weight greater than a give one
+//    //get only the animals with the weight greater than a give one
 //    @GetMapping("/filter/{weight}")
-//    ResponseEntity<Object> filterAnimals(@PathVariable("weight") Double weight,
-//                                         @RequestParam(defaultValue = "0") Integer pageNo,
-//                                         @RequestParam(defaultValue = "25") Integer pageSize){
+//    public Object filterAnimals(@PathVariable("weight") Double weight){
 //        if(weight == null){
 //            return this.animalService.findAllAnimals();
 //        }

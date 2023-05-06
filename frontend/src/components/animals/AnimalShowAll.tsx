@@ -162,7 +162,7 @@ export const AnimalsShowAll = () => {
                     </Table>
                 </TableContainer>
                 
-                <Paginator
+                {/* <Paginator
                         rowsPerPage={pageSize}
                         totalRows={totalRows}
                         currentPage={page}
@@ -171,7 +171,7 @@ export const AnimalsShowAll = () => {
                         setPage={setCurrentPage}
                         goToNextPage={goToNextPage}
                         goToPrevPage={goToPrevPage}
-                    />
+                    /> */}
                 </>
             )
             }
