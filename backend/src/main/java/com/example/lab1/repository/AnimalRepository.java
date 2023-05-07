@@ -22,7 +22,6 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     Page<Animal> findAll(@Nonnull Pageable pageable);
 
     Page<Animal> findByWeightGreaterThan(Double weight, Pageable pageable);
-    //List<Animal> findByShelter(Long id);
 
     @Nonnull
     @EntityGraph(attributePaths = "shelter")
