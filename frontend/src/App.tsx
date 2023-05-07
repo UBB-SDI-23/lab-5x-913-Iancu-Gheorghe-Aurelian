@@ -20,6 +20,7 @@ import { AnimalFilter } from "./components/animals/AnimalFilter";
 import { AnimalDelete } from "./components/animals/AnimalDelete";
 import { Statistics } from "./components/Statistics";
 import { ShelterStatisticsAverageWeight } from "./components/shelters/ShelterStatisticsAverageWeight";
+import { AnimalUpdate } from "./components/animals/AnimalUpdate";
 
 
 
@@ -45,6 +46,7 @@ function App() {
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
                       <Route path="/animal/filter/:weight" element={<AnimalFilter />} />
                       <Route path="/animal/delete/:animalId" element={<AnimalDelete />} />
+                      <Route path="/animal/update/:animalId" element={<AnimalUpdate />} />
 
                       {/* volunteer routes */}            
                       <Route path="/volunteer" element={<VolunteerShowAll />}/>
@@ -57,6 +59,9 @@ function App() {
                       <Route path="/shelter/statistics/countAnimal" element={<ShelterStatisticsCountAnimal />} />
                       <Route path="/shelter/statistics/averageWeight" element={<ShelterStatisticsAverageWeight />} />
                       <Route path="/shelter/statistics" element={<Statistics />} />
+
+                      {/* volunteerings routes */}
+
               </Routes>
       </Router>
     </React.Fragment>

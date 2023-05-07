@@ -7,5 +7,4 @@ export interface Animal{
     weight: number; 
     dateOfBirth: string;
     breed: string;
-    shelterId: number;
 }
