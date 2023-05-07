@@ -2,6 +2,7 @@ package com.example.lab1.controller;
 
 import com.example.lab1.model.Shelter;
 import com.example.lab1.model.Volunteer;
+import com.example.lab1.modelDTO.shelterDTO.ShelterDTOAll;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOById;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOWithVolunteering;
 import com.example.lab1.modelDTO.volunteerDTO.VolunteerDTOSimple;
@@ -10,6 +11,8 @@ import com.example.lab1.service.ShelterService;
 import com.example.lab1.service.VolunteerService;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,32 +39,43 @@ public class VolunteerController {
 
     //get all the volunteers only with their info
     @GetMapping("/getAll")
-    public List<VolunteerDTOSimple> findAllVolunteers(){
-        return this.volunteerService.findAllVolunteers();
+    ResponseEntity<List<VolunteerDTOSimple>> findAllVolunteers(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                               @RequestParam(defaultValue = "10") Integer pageSize){
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.volunteerService.findAllVolunteers(pageNo, pageSize));
     }
 
 
     @GetMapping("/{id}")
-    public VolunteerDTO_forOne findVolunteerById(@PathVariable("id") Long id){
-        return this.convertToReaderDTO_forOne(this.volunteerService.findVolunteerById(id));
+    ResponseEntity<VolunteerDTO_forOne> findVolunteerById(@PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.convertToReaderDTO_forOne(this.volunteerService.findVolunteerById(id)));
     }
 
     //add new volunteer to database
     @PostMapping("/save")
-    public Volunteer saveVolunteer(@RequestBody Volunteer volunteer){
-        return volunteerService.saveVolunteer(volunteer);
+    ResponseEntity<Volunteer> saveVolunteer(@RequestBody Volunteer volunteer){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(volunteerService.saveVolunteer(volunteer));
     }
 
     //update volunteer by id
     @PutMapping("/update/{id}")
-    public Volunteer updateVolunteer(@RequestBody Volunteer volunteer, @PathVariable("id") Long id){
-        return this.volunteerService.updateVolunteer(volunteer, id);
+    ResponseEntity<Volunteer> updateVolunteer(@RequestBody Volunteer volunteer, @PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.volunteerService.updateVolunteer(volunteer, id));
     }
 
     //delete volunteer by id
     @DeleteMapping("/delete/{id}")
-    public void deleteVolunteer(@PathVariable("id") Long id){
+    ResponseEntity<HttpStatus> deleteVolunteer(@PathVariable("id") Long id){
         this.volunteerService.deleteVolunteer(id);
+        return ResponseEntity.accepted().body(HttpStatus.OK);
     }
 
     private VolunteerDTO_forOne convertToReaderDTO_forOne(Volunteer volunteer){

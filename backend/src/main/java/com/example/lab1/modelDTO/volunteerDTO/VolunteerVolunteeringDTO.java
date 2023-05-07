@@ -10,7 +10,7 @@ public class VolunteerVolunteeringDTO
     private String lastName;
     private String email;
     private Long phone;
-    private String nationality;
+    private String country;
     private Integer hoursPerWeek;
     private String role;
 }

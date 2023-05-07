@@ -8,12 +8,15 @@ import com.example.lab1.modelDTO.shelterDTO.ShelterDTOAverage;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOById;
 
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOCount;
-import com.example.lab1.repository.ShelterRepository;
-import com.example.lab1.repository.ShelterRepositoryCustom;
+import com.example.lab1.repository.ShelterRepository.ShelterRepository;
+import com.example.lab1.repository.ShelterRepository.ShelterRepositoryCustom;
 import com.example.lab1.repository.VolunteerRepository;
 import com.example.lab1.service.mappers.shelterMappers.ShelterDTOAllMapper;
 import com.example.lab1.service.mappers.shelterMappers.ShelterDTOByIdMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +43,11 @@ public class ShelterService {
         this.volunteerRepository = volunteerRepository;
     }
 
-    public List<ShelterDTOAll> findAllShelters(){
-        return shelterRepository.findAll()
+    public List<ShelterDTOAll> findAllShelters(Integer pageNo, Integer pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("shelterId"));
+
+        return this.shelterRepository.findAll(pageable)
+                .getContent()
                 .stream()
                 .map(shelterDTOAllMapper)
                 .collect(Collectors.toList());

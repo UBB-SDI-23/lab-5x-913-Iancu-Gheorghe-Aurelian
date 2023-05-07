@@ -40,7 +40,8 @@ export const ShelterAdd = () => {
         address:"",
         numberOfVolunteers:1,
         capacity:1,
-        city:""
+        city:"",
+        description:""
     });
 
     const addShelter = async (event: { preventDefault: () => void }) => {
@@ -127,6 +128,14 @@ export const ShelterAdd = () => {
                                    fullWidth
                                    sx={{ mb: 2 }}
                                    onChange={(event) => setShelter({ ...shelter, city: event.target.value })}
+                        />
+                        <TextField style={{color:"#2471A3", fontWeight:'bold'}}
+                                   id="description"
+                                   label="Description"
+                                   variant="outlined"
+                                   fullWidth
+                                   sx={{ mb: 2 }}
+                                   onChange={(event) => setShelter({ ...shelter, description: event.target.value })}
                         />
                     </form>
                 </CardContent>

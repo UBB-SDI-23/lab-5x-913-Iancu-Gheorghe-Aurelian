@@ -6,6 +6,7 @@ public record ShelterDTOAll (
         String address,
         Integer numberOfVolunteers,
         Integer capacity,
-        String city
+        String city,
+        String description
 ){
 }

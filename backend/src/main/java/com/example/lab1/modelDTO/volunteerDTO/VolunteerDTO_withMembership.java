@@ -14,7 +14,7 @@ public class VolunteerDTO_withMembership {
     private String lastName;
     private String email;
     private Long phone;
-    private String nationality;
+    private String country;
     private Integer hoursPerWeek;
     private String role;
 }

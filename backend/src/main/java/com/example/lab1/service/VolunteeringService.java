@@ -7,7 +7,7 @@ import com.example.lab1.model.Shelter;
 import com.example.lab1.model.Volunteer;
 import com.example.lab1.model.Volunteering;
 import com.example.lab1.modelDTO.volunteerDTO.VolunteerVolunteeringDTO;
-import com.example.lab1.repository.ShelterRepository;
+import com.example.lab1.repository.ShelterRepository.ShelterRepository;
 import com.example.lab1.repository.VolunteerRepository;
 import com.example.lab1.repository.VolunteeringRepository;
 import org.springframework.stereotype.Service;

@@ -2,6 +2,7 @@ import { Box, AppBar, Toolbar, IconButton, Typography, Button } from "@mui/mater
 import { Link, useLocation } from "react-router-dom";
 import PetsIcon from '@mui/icons-material/Pets';
 import HomeIcon from '@mui/icons-material/Home';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 export const AppMenu = () => {
 	const location = useLocation();
@@ -50,6 +51,15 @@ export const AppMenu = () => {
 						sx={{ mr: 5 }}
 						startIcon={<PetsIcon />}>
 						Volunteers
+					</Button>
+					<Button
+						variant={path.startsWith("/shelter/statistics/" ) ? "outlined" : "text"}
+						to="/shelter/statistics/" 
+						component={Link}
+						color="inherit"
+						sx={{ mr: 5 }}
+						startIcon={<InsightsIcon />}>
+						Statistics
 					</Button>
 
 

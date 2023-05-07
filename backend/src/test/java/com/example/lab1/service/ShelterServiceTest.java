@@ -2,8 +2,7 @@ package com.example.lab1.service;
 
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOAverage;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOCount;
-import com.example.lab1.repository.ShelterRepository;
-import com.example.lab1.repository.ShelterRepositoryCustom;
+import com.example.lab1.repository.ShelterRepository.ShelterRepositoryCustom;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

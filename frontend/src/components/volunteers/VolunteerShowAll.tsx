@@ -10,6 +10,8 @@ import {
 	Container,
 	IconButton,
 	Tooltip,
+    Button,
+    Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,13 +24,50 @@ import AddIcon from "@mui/icons-material/Add";
 
 export const VolunteerShowAll = () => {
     const[loading, setLoading] = useState(true);
-    const[volunteers, setVoluteers] = useState([]);
+    const[volunteers, setVolunteers] = useState([]);
+    const[pageSize, setPageSize] = useState(10);
+    const[total, setTotal] = useState(0);
+    const[currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
-        fetch(`${BACKEND_API_URL}/volunteer/getAll`)
-            .then(res => res.json())
-            .then(data => {setVoluteers(data); setLoading(false);})
-    }, []);
+        setLoading(true);
+    
+        const fetchVolunteers = () => {
+          fetch(`${BACKEND_API_URL}/volunteer/getAll`)
+          .then((response) => response.json())
+          .then((count) => {
+            fetch(`${BACKEND_API_URL}/volunteer/getAll?pageNo=${currentPage}&pageSize=${pageSize}`)
+            .then((response) => response.json())
+            .then((data) => {
+              setTotal(count);
+              setVolunteers(data);
+              setLoading(false);
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            setLoading(false);
+          });
+        };
+        fetchVolunteers();
+      }, [currentPage, pageSize]);
+
+      const handlePreviousPage = () => {
+        if(currentPage>0)
+        {
+          setCurrentPage(currentPage-1);
+        }
+      };
+    
+      const handleNextPage = () => {
+        setCurrentPage(currentPage+1);
+      };
+
+    // useEffect(() => {
+    //     fetch(`${BACKEND_API_URL}/volunteer/getAll`)
+    //         .then(res => res.json())
+    //         .then(data => {setVoluteers(data); setLoading(false);})
+    // }, []);
 
     console.log(volunteers);
 
@@ -40,6 +79,26 @@ export const VolunteerShowAll = () => {
             {loading && <CircularProgress />}
 
             {!loading && volunteers.length == 0 && <div>No volunteers found</div>}
+
+            {!loading && (
+            <div style ={{display: "flex", alignItems:"center"}}>
+               
+                <Button
+                  sx={{color:"red"}}
+                  disabled={currentPage===0}
+                  onClick={handlePreviousPage}>
+                    Previous Page
+                </Button>
+                <Button
+                 sx={{color:"red"}} onClick={handleNextPage}>
+                  Next Page
+                 </Button>
+
+                 <Box mx={2} display="flex" alignItems="center">
+                  Page {currentPage+1} of {Math.ceil(total/pageSize)}
+                 </Box>
+            </div>
+            )}
 
             {!loading && volunteers.length > 0 && (
 
@@ -93,6 +152,15 @@ export const VolunteerShowAll = () => {
                 </TableContainer>
             )
             }
+            <Button
+          sx={{color:"red"}}
+          disabled={currentPage===0}
+          onClick={handlePreviousPage}>
+            Previous Page
+          </Button>
+          <Button sx={{color:"red"}} onClick={handleNextPage}>
+          Next Page
+        </Button>
         </Container>
 
     );

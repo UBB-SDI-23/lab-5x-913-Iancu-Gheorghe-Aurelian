@@ -5,6 +5,9 @@ import com.example.lab1.model.Volunteer;
 import com.example.lab1.modelDTO.volunteerDTO.VolunteerDTOSimple;
 import com.example.lab1.repository.VolunteerRepository;
 import com.example.lab1.service.mappers.volunteerMappers.VolunteerDTOSimpleMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +29,10 @@ public class VolunteerService {
 
 
 
-    public List<VolunteerDTOSimple> findAllVolunteers(){
-        return this.volunteerRepository.findAll()
+    public List<VolunteerDTOSimple> findAllVolunteers(Integer pageNo, Integer pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("volunteerId"));
+        return this.volunteerRepository.findAll(pageable)
+                .getContent()
                 .stream()
                 .map(volunteerDTOSimpleMapper)
                 .collect(Collectors.toList());

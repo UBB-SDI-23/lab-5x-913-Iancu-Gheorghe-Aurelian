@@ -6,6 +6,6 @@ public record VolunteerDTOSimple(
         String lastName,
         String email,
         Long phone,
-        String nationality
+        String country
 ) {
 }

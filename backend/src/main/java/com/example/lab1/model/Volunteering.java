@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "volunteers_in")
+@Table(name = "volunteers_in", indexes = {
+        @Index(name = "fk_volunteer_id_membership_index", columnList = "volunteer_id"),
+        @Index(name = "fk_shelter_id_membership_index", columnList = "shelter_id")
+})
 public class Volunteering {
     @EmbeddedId
     private KeyVolunteering ID;

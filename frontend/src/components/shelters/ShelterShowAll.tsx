@@ -10,6 +10,8 @@ import {
 	Container,
 	IconButton,
 	Tooltip,
+    Button,
+    Box,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -25,12 +27,49 @@ import SortIcon from '@mui/icons-material/Sort';
 export const SheltersShowAll = () => {
     const[loading, setLoading] = useState(true);
     const[shelters, setShelters] = useState([]);
+    const [pageSize, setPageSize] = useState(100);
+    const [total, setTotal] =useState(0)
+    const [currentPage, setCurrentPage]=useState(0)
+
+    // useEffect(() => {
+    //     fetch(`${BACKEND_API_URL}/shelter/getAll`)
+    //         .then(res => res.json())
+    //         .then(data => {setShelters(data); setLoading(false);})
+    // }, []);
 
     useEffect(() => {
-        fetch(`${BACKEND_API_URL}/shelter/getAll`)
-            .then(res => res.json())
-            .then(data => {setShelters(data); setLoading(false);})
-    }, []);
+        setLoading(true);
+    
+        const fetchShelters = () => {
+          fetch(`${BACKEND_API_URL}/shelter/getAll`)
+          .then((response) => response.json())
+          .then((count) => {
+            fetch(`${BACKEND_API_URL}/shelter/getAll?pageNo=${currentPage}&pageSize=${pageSize}`)
+            .then((response) => response.json())
+            .then((data) => {
+              setTotal(count);
+              setShelters(data);
+              setLoading(false);
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            setLoading(false);
+          });
+        };
+        fetchShelters();
+      }, [currentPage, pageSize]);
+
+      const handlePreviousPage = () => {
+        if(currentPage>0)
+        {
+          setCurrentPage(currentPage-1);
+        }
+      };
+    
+      const handleNextPage = () => {
+        setCurrentPage(currentPage+1);
+      };
 
     console.log(shelters);
 
@@ -49,13 +88,33 @@ export const SheltersShowAll = () => {
     }
 
     return (
-
+        <>
         <Container>
             <h1 style={{marginTop:"65px"}}>All Shelters</h1>
 
             {loading && <CircularProgress />}
 
             {!loading && shelters.length == 0 && <div>No shelters found</div>}
+
+            {!loading && (
+            <div style ={{display: "flex", alignItems:"center"}}>
+               
+                <Button
+                  sx={{color:"red"}}
+                  disabled={currentPage===0}
+                  onClick={handlePreviousPage}>
+                    Previous Page
+                </Button>
+                <Button
+                 sx={{color:"red"}} onClick={handleNextPage}>
+                  Next Page
+                 </Button>
+
+                 <Box mx={2} display="flex" alignItems="center">
+                  Page {currentPage+1} of {Math.ceil(total/pageSize)}
+                 </Box>
+            </div>
+            )}
 
             {!loading && shelters.length > 0 && (
 
@@ -67,6 +126,7 @@ export const SheltersShowAll = () => {
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight:'bold'}}>Name</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Address</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Number of volunteers</TableCell>
+                                <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>Description</TableCell>
                                 <TableCell align="center" style={{color:"#2471A3", fontWeight: 'bold'}}>
                                     Capacity
                                 <IconButton sx={{color:"black", paddingLeft:2, fontSize:"20px", width:"20px", '&:focus': {
@@ -99,6 +159,7 @@ export const SheltersShowAll = () => {
                                     <TableCell align="center">{shelter.name}</TableCell>
                                     <TableCell align="center">{shelter.address}</TableCell>
                                     <TableCell align="center">{shelter.numberOfVolunteers}</TableCell>
+                                    <TableCell align="center">{shelter.description}</TableCell>
                                     <TableCell align="center">{shelter.capacity}</TableCell>
                                     <TableCell align="center">{shelter.city}</TableCell> 
                                     <TableCell align="center">
@@ -119,9 +180,21 @@ export const SheltersShowAll = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
             )
+            
             }
-        </Container>
+            <Button
+          sx={{color:"red"}}
+          disabled={currentPage===0}
+          onClick={handlePreviousPage}>
+            Previous Page
+          </Button>
 
+        <Button sx={{color:"red"}} onClick={handleNextPage}>
+          Next Page
+        </Button>
+        </Container>
+        </>
     );
 }

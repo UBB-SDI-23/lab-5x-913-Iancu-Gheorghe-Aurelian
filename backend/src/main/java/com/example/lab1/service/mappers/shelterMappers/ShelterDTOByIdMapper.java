@@ -22,6 +22,7 @@ public class ShelterDTOByIdMapper implements Function<Shelter, ShelterDTOById> {
                 shelter.getNumberOfVolunteers(),
                 shelter.getCapacity(),
                 shelter.getCity(),
+                shelter.getDescription(),
                 shelter.getAnimals()
                         .stream()
                         .map(animalDTONoShelterMapper)

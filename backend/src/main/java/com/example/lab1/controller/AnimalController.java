@@ -28,7 +28,7 @@ public class AnimalController {
     @GetMapping("/getAll")
     ResponseEntity<List<AnimalDTOIdShelter>> findAllAnimals(@RequestParam(required = false) Double minWeight,
                                                             @RequestParam(defaultValue = "0") Integer pageNo,
-                                                            @RequestParam(defaultValue = "25") Integer pageSize){
+                                                            @RequestParam(defaultValue = "10") Integer pageSize){
         if(minWeight == null){
             return ResponseEntity
                     .status(HttpStatus.OK)
@@ -41,34 +41,42 @@ public class AnimalController {
 
     //get animal by id with all the info about its shelter
     @GetMapping("/{id}")
-    public Optional<Animal> findAnimalById(@PathVariable("id") Long id){
-        return animalService.findAnimalById(id);
+    ResponseEntity<Animal> findAnimalById(@PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.animalService.findAnimalById(id));
     }
 
     //Add an animal in existent shelter
     @PostMapping("/save/shelter{id}")
-    public Animal saveAnimal(@Valid @RequestBody Animal animal, @PathVariable("id") Long id){
-        return animalService.saveAnimal(animal, id);
+    ResponseEntity<Animal> saveAnimal(@Valid @RequestBody Animal animal, @PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(animalService.saveAnimal(animal, id));
     }
 
     //Add bulk animal in existent shelter
     @PostMapping("/multipleSave/shelter{id}")
-    public void saveAnimals(@RequestBody List<Animal> animals, @PathVariable("id") Long id){
+    ResponseEntity<HttpStatus> saveAnimals(@RequestBody List<Animal> animals, @PathVariable("id") Long id){
         for(Animal animal : animals){
             animalService.saveAnimal(animal, id);
         }
+        return ResponseEntity.accepted().body(HttpStatus.OK);
     }
 
     //update animal with id = id
     @PutMapping("/update/{id}")
-    public Animal updateAnimal(@Valid @RequestBody Animal animal, @PathVariable("id") Long id){
-        return animalService.updateAnimal(animal, id);
+    ResponseEntity<Animal> updateAnimal(@Valid @RequestBody Animal animal, @PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.animalService.updateAnimal(animal, id));
     }
 
     //delete animal with id = id
     @DeleteMapping("/delete/{id}")
-    public void deleteAnimal(@PathVariable("id") Long id){
+    ResponseEntity<HttpStatus> deleteAnimal(@PathVariable("id") Long id){
         animalService.deleteAnimal(id);
+        return ResponseEntity.accepted().body(HttpStatus.OK);
     }
 
 //    //get only the animals with the weight greater than a give one

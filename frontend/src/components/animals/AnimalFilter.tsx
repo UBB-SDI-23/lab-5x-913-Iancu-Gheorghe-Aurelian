@@ -24,7 +24,7 @@ export const AnimalFilter = () => {
 
 
     useEffect(() => {
-        fetch(`${BACKEND_API_URL}/animal/filter/${weight}`)
+        fetch(`${BACKEND_API_URL}/animal/getAll?minWeight=${weight}`)
             .then(res => res.json())
             .then(data => {setAnimals(data); setLoading(false);})
     }, []);

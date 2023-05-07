@@ -19,6 +19,7 @@ public class ShelterDTOEverything {
     private Integer numberOfVolunteers;
     private Integer capacity;
     private String city;
+    private String description;
     private List<Animal> animals;
     private Set<VolunteerDTO_withMembership> volunteerings;
 }

@@ -19,7 +19,10 @@ import java.time.LocalDate;
 @ToString
 //Database part
 @Entity
-@Table(name = "animal")
+@Table(name = "animal", indexes = {
+        @Index(name = "fk_animal_shelter_index", columnList = "shelter_animal_fk"),
+        @Index(name = "weight_animals_index", columnList = "weight")
+})
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

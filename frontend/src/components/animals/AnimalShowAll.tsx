@@ -10,6 +10,7 @@ import {
 	Container,
 	IconButton,
 	Tooltip,
+    Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -29,58 +30,56 @@ import { Paginator } from "../pagination/pagination";
 export const AnimalsShowAll = () => {
     const[loading, setLoading] = useState(true);
     const[animals, setAnimals] = useState([]);
-    const[page, setPage] = useState(1);
-    const[pageSize, setPageSize] = useState(25);
-    const[totalRows, setTotalRows] = useState(0);
-    const crt = (page - 1) * pageSize + 1;
+    const[pageSize, setPageSize] = useState(10);
+    const[total, setTotal] = useState(0);
+    const[currentPage, setCurrentPage] = useState(0);
 
-    const [isLastPage, setIsLastPage] = useState(false);
-
-    const setCurrentPage = (newPage: number) => {
-        setPage(newPage);
-    }
-
-    const goToNextPage = () => {
-        if (isLastPage) {
-            return;
+    const handlePreviousPage = () => {
+        if(currentPage>0)
+        {
+          setCurrentPage(currentPage-1);
         }
+      };
+    
+      const handleNextPage = () => {
+        setCurrentPage(currentPage+1);
+      };
 
-        setPage(page + 1);
-    }
-
-    const goToPrevPage = () => {
-        if(page === 1){
-            return;
-        }
-
-        setPage(page - 1);
-    }
-
-    const fetchAnimals = async () => {
+      useEffect(() => {
         setLoading(true);
-        const response = await fetch(
-            `${BACKEND_API_URL}/animal/getAll`
-        );
-        const { count, next, previous, results } = await response.json();
-        setAnimals(results);
-        setTotalRows(count);
-        setIsLastPage(!next);
-        setLoading(false);
-    };
-        useEffect(() => {
-            fetchAnimals();
-        }, [page]);
+    
+        const fetchAnimals = () => {
+          fetch(`${BACKEND_API_URL}/animal/getAll`)
+          .then((response) => response.json())
+          .then((count) => {
+            fetch(`${BACKEND_API_URL}/animal/getAll?pageNo=${currentPage}&pageSize=${pageSize}`)
+            .then((response) => response.json())
+            .then((data) => {
+              setTotal(count);
+              setAnimals(data);
+              setLoading(false);
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            setLoading(false);
+          });
+        };
+        fetchAnimals();
+      }, [currentPage, pageSize]);
 
 
-    useEffect(() => {
-        fetch(`${BACKEND_API_URL}/animal/getAll`)
-            .then(res => res.json())
-            .then(data => {setAnimals(data); setLoading(false);})
-    }, []);
+    // useEffect(() => {
+    //     fetch(`${BACKEND_API_URL}/animal/getAll`) // ?pageNo=${page}&pageSize=${pageSize}
+    //         .then(res => res.json())
+    //         .then(data => {setAnimals(data); setLoading(false);})
+    // }, []);
 
-    console.log(animals);
+    // console.log(animals);
 
     const[weight, setWeight] = useState(0);
+
+    
 
     return (
 
@@ -90,6 +89,26 @@ export const AnimalsShowAll = () => {
             {loading && <CircularProgress />}
 
             {!loading && animals.length == 0 && <div>No animals found</div>}
+
+            {!loading && (
+            <div style ={{display: "flex", alignItems:"center"}}>
+               
+                <Button
+                  sx={{color:"red"}}
+                  disabled={currentPage===0}
+                  onClick={handlePreviousPage}>
+                    Previous Page
+                </Button>
+                <Button
+                 sx={{color:"red"}} onClick={handleNextPage}>
+                  Next Page
+                 </Button>
+
+                 <Box mx={2} display="flex" alignItems="center">
+                  Page {currentPage+1} of {Math.ceil(total/pageSize)}
+                 </Box>
+            </div>
+            )}
 
             {!loading && animals.length > 0 && (
             <>
@@ -161,7 +180,16 @@ export const AnimalsShowAll = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                
+                <Button
+          sx={{color:"red"}}
+          disabled={currentPage===0}
+          onClick={handlePreviousPage}>
+            Previous Page
+          </Button>
+
+        <Button sx={{color:"red"}} onClick={handleNextPage}>
+          Next Page
+        </Button>
                 {/* <Paginator
                         rowsPerPage={pageSize}
                         totalRows={totalRows}
@@ -172,7 +200,7 @@ export const AnimalsShowAll = () => {
                         goToNextPage={goToNextPage}
                         goToPrevPage={goToPrevPage}
                     /> */}
-                </>
+            </>
             )
             }
         </Container>

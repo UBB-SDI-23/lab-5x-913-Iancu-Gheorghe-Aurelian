@@ -22,12 +22,12 @@ import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { ShelterOrdNoAnimals } from "../../models/ShelterOrdNoAnimals";
 
-export const ShelterStatistics = () => {
+export const ShelterStatisticsCountAnimal = () => {
     const[loading, setLoading] = useState(true);
     const[shelters, setShelters] = useState([]);
 
     useEffect(() => {
-        fetch(`${BACKEND_API_URL}/shelter/statistics-countAnimal`)
+        fetch(`${BACKEND_API_URL}/shelter/statistics/countAnimal`)
             .then(res => res.json())
             .then(data => {setShelters(data); setLoading(false);})
     }, []);

@@ -12,6 +12,8 @@ import com.example.lab1.service.AnimalService;
 import com.example.lab1.service.ShelterService;
 import com.example.lab1.service.VolunteeringService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/shelter")
+
 public class ShelterController {
     private final ShelterService shelterService;
 
@@ -33,47 +36,63 @@ public class ShelterController {
 
     //get all shelters without any information about the animals
     @GetMapping("/getAll")
-    public List<ShelterDTOAll> findAllShelters(){
-        return shelterService.findAllShelters();
+    ResponseEntity<List<ShelterDTOAll>> findAllShelters(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                        @RequestParam(defaultValue = "10") Integer pageSize){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.shelterService.findAllShelters(pageNo, pageSize));
     }
 
     //get shelter by id with all the animals that live there
     @GetMapping("/{id}")
-    public ShelterDTOById findShelterById(@PathVariable("id") Long id){
-        return shelterService.findShelterById(id);
+    ResponseEntity<ShelterDTOById> findShelterById(@PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(shelterService.findShelterById(id));
     }
 
-    @GetMapping("/statistics-countAnimal")
-    public List<ShelterDTOCount> getSheltersOrderedByNumberOfAnimalsAsc(){
-        return this.shelterService.getSheltersOrderedByNumberOfAnimalsAsc();
+    @GetMapping("/statistics/countAnimal")
+    ResponseEntity<List<ShelterDTOCount>> getSheltersOrderedByNumberOfAnimalsAsc(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.shelterService.getSheltersOrderedByNumberOfAnimalsAsc());
     }
 
-    @GetMapping("/statistics-averageWeight")
-    public List<ShelterDTOAverage> getSheltersOrderedByAverageWeightDesc(){
-        return this.shelterService.getSheltersOrderedByAverageWeightDesc();
+    @GetMapping("/statistics/averageWeight")
+    ResponseEntity<List<ShelterDTOAverage>> getSheltersOrderedByAverageWeightDesc(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.shelterService.getSheltersOrderedByAverageWeightDesc());
     }
 
     //add shelter to database
     @PostMapping("/save")
-    public Shelter saveShelter(@Valid @RequestBody Shelter shelter){
-        return shelterService.saveShelter(shelter);
-    }
+    ResponseEntity<Shelter> saveShelter(@Valid @RequestBody Shelter shelter){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(shelterService.saveShelter(shelter));}
 
     //add volunteering for a shelter and a volunteer
     @PostMapping("/save/shelter/{id}/volunteer")
-    public Volunteering newVolunteerVolunteering(@RequestBody VolunteerVolunteeringDTO volunteer, @PathVariable Long id) {
-        return this.volunteeringService.createVolunteering(volunteer, id);
+    ResponseEntity<Volunteering> newVolunteerVolunteering(@RequestBody VolunteerVolunteeringDTO volunteer, @PathVariable Long id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.volunteeringService.createVolunteering(volunteer, id));
     }
 
     //update shelter by id
     @PutMapping("/update/{id}")
-    public Shelter updateShelter(@Valid @RequestBody Shelter shelter, @PathVariable("id") Long id){
-        return shelterService.updateShelter(shelter, id);
+    ResponseEntity<Shelter> updateShelter(@Valid @RequestBody Shelter shelter, @PathVariable("id") Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(shelterService.updateShelter(shelter, id));
     }
 
     //delete shelter by id
     @DeleteMapping("/delete/{id}")
-    public void deleteShelter(@PathVariable("id") Long id){
+    ResponseEntity<HttpStatus> deleteShelter(@PathVariable("id") Long id){
         this.shelterService.deleteShelter(id);
+        return ResponseEntity.accepted().body(HttpStatus.OK);
+
     }
 }

@@ -1,18 +1,20 @@
-package com.example.lab1.repository;
+package com.example.lab1.repository.ShelterRepository;
 
 import com.example.lab1.model.Animal;
 import com.example.lab1.model.Shelter;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOAverage;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOCount;
+import com.example.lab1.repository.ShelterRepository.ShelterRepositoryCustom;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class ShelterRepositoryCustomImpl implements ShelterRepositoryCustom{
+public class ShelterRepositoryCustomImpl implements ShelterRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -32,7 +34,7 @@ public class ShelterRepositoryCustomImpl implements ShelterRepositoryCustom{
                 .orderBy(cb.asc(cb.count(shelterAnimalJoin.get("name"))));
 
 
-        return this.entityManager.createQuery(query).getResultList();
+        return this.entityManager.createQuery(query).setMaxResults(25).getResultList();
     }
 
     @Override
@@ -50,6 +52,6 @@ public class ShelterRepositoryCustomImpl implements ShelterRepositoryCustom{
                 .groupBy(shelterRoot.get("name"))
                 .orderBy(cb.asc(cb.avg(shelterAnimalJoin.get("weight"))));
 
-        return this.entityManager.createQuery(query).getResultList();
+        return this.entityManager.createQuery(query).setMaxResults(25).getResultList();
     }
 }

@@ -15,7 +15,8 @@ public class ShelterDTOAllMapper implements Function<Shelter, ShelterDTOAll> {
                 shelter.getAddress(),
                 shelter.getNumberOfVolunteers(),
                 shelter.getCapacity(),
-                shelter.getCity()
+                shelter.getCity(),
+                shelter.getDescription()
         );
     }
 }

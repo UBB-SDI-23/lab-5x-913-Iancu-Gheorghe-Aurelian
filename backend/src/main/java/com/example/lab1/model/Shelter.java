@@ -18,7 +18,9 @@ import java.util.List;
 @ToString
 //Database part
 @Entity
-@Table(name = "shelter")
+@Table(name = "shelter", indexes = {
+        @Index(name = "name_shelters_index", columnList = "name")
+})
 public class Shelter {
 
     @Id

@@ -12,6 +12,7 @@ public record ShelterDTOById (
         Integer numberOfVolunteers,
         Integer capacity,
         String city,
+        String description,
         List<AnimalDTONoShelter> animals
 ) {
 }

@@ -1,4 +1,4 @@
-package com.example.lab1.repository;
+package com.example.lab1.repository.ShelterRepository;
 
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOAverage;
 import com.example.lab1.modelDTO.shelterDTO.ShelterDTOCount;

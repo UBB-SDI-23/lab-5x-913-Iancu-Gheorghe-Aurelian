@@ -36,6 +36,7 @@ export const ShelterDetails = () => {
                         <h2 style={{textAlign:"left", fontWeight:'bold'}}>{shelter?.name}</h2>
                     </Box>
 
+                    <p  style={{textAlign:"left", fontWeight:'bold'}}>Description: {shelter?.description}</p>
                     <p  style={{textAlign:"left", fontWeight:'bold'}}>Address: {shelter?.address}</p>
                     <p  style={{textAlign:"left", fontWeight:'bold'}}>Number of volunteers: {shelter?.numberOfVolunteers}</p>
                     <p  style={{textAlign:"left", fontWeight:'bold'}}>Capacity: {shelter?.capacity}</p>

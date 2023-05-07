@@ -10,7 +10,7 @@ import { ShelterDetails } from "./components/shelters/ShelterDetails";
 import { ShelterAdd } from "./components/shelters/ShelterAdd";
 import { ShelterDelete } from "./components/shelters/ShelterDelete";
 import { ShelterUpdate } from "./components/shelters/ShelterUpdate";
-import { ShelterStatistics } from "./components/shelters/ShelterAnimalStatistic";
+import { ShelterStatisticsCountAnimal } from "./components/shelters/ShelterStatisticsCountAnimal";
 import { VolunteerShowAll } from "./components/volunteers/VolunteerShowAll";
 import { VolunteerAdd } from "./components/volunteers/VolunteerAdd";
 import { VolunteerDetails } from "./components/volunteers/VolunteerDetails";
@@ -18,6 +18,8 @@ import { VolunteerDelete } from "./components/volunteers/VolunteerDelete";
 import { VolunteerUpdate } from "./components/volunteers/VolunteerUpdate";
 import { AnimalFilter } from "./components/animals/AnimalFilter";
 import { AnimalDelete } from "./components/animals/AnimalDelete";
+import { Statistics } from "./components/Statistics";
+import { ShelterStatisticsAverageWeight } from "./components/shelters/ShelterStatisticsAverageWeight";
 
 
 
@@ -37,7 +39,7 @@ function App() {
                       <Route path="/shelter/:shelterId" element={<ShelterDetails />}/>
                       <Route path="/shelter/delete/:shelterId" element={<ShelterDelete />} />
                       <Route path="/shelter/update/:shelterId" element={<ShelterUpdate />} />
-                      <Route path="/shelter/statistics-countAnimal" element={<ShelterStatistics />} />
+                      
                       {/* animal routes */}
                       <Route path="/animal" element={<AnimalsShowAll />}/>
                       <Route path="/animal/:animalId" element={<AnimalDetails />} />
@@ -50,6 +52,11 @@ function App() {
                       <Route path="/volunteer/:volunteerId" element={<VolunteerDetails />}/>
                       <Route path="/volunteer/delete/:volunteerId" element={<VolunteerDelete />} />
                       <Route path="/volunteer/update/:volunteerId" element={<VolunteerUpdate />} />
+
+                      {/* stats routes */}
+                      <Route path="/shelter/statistics/countAnimal" element={<ShelterStatisticsCountAnimal />} />
+                      <Route path="/shelter/statistics/averageWeight" element={<ShelterStatisticsAverageWeight />} />
+                      <Route path="/shelter/statistics" element={<Statistics />} />
               </Routes>
       </Router>
     </React.Fragment>

@@ -1,112 +1,109 @@
-import { Button } from "@mui/material";
 import { debounce } from "lodash";
-import React from "react";
 import { useCallback, useEffect, useMemo } from "react";
+import React from "react";
+import { Button } from "@mui/material";
+
 
 export interface PaginatorProps {
-  rowsPerPage: number;
-  totalRows: number;
-  currentPage: number;
-  isFirstPage: boolean;
-  isLastPage: boolean;
-  setPage: (page: number) => void;
-  goToNextPage: () => void;
-  goToPrevPage: () => void;
+    rowsPerPage: number;
+    totalRows: number;
+    currentPage: number;
+    isFirstPage: boolean;
+    isLastPage: boolean;
+    setPage: (page: number) => void;
+    goToNextPage: () => void;
+    goToPrevPage: () => void;
 }
 
-export const Paginator = ({
-  rowsPerPage,
-  totalRows,
-  currentPage,
-  isFirstPage,
-  isLastPage,
-  setPage,
-  goToNextPage,
-  goToPrevPage,
-}: PaginatorProps) => {
-  const totalPages = Math.ceil(totalRows / rowsPerPage);
-  const pageRange = 11;
+export const Paginator = ({ rowsPerPage, totalRows, currentPage, isFirstPage, isLastPage, setPage, goToNextPage, goToPrevPage }: PaginatorProps) => {
 
-  const changeCurrentPage = (pageNumber: number) => {
-    if (pageNumber < 1) {
-      setPage(1);
-      
-      return;
-    } else if (pageNumber > totalPages) {
-      setPage(totalPages);
-      return;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    const pageRange = 5;
+
+
+    const changeCurrentPage = (pageNumber: number) => {
+        if (pageNumber < 1) {
+            setPage(1);
+            return;
+        }
+
+        else if (pageNumber > totalPages) {
+            setPage(totalPages);
+            return;
+        }
+
+        setPage(pageNumber);
     }
 
-    setPage(pageNumber);
-  };
+    const debounceOnChange = useCallback(debounce(changeCurrentPage, 500), []);
 
-  const debounceOnChange = useCallback(debounce(changeCurrentPage, 500), []);
+    useEffect(() => {
+        return () => {
+            debounceOnChange.cancel();
+        };
+    }, [debounceOnChange])
 
-  useEffect(() => {
-    return () => {
-      debounceOnChange.cancel();
-    };
-  }, [debounceOnChange]);
+    const listOfPages = useMemo(() => {
+        const pageNumbers = [];
+    
+        debugger;
+        if (totalPages <= pageRange) {
+          for (let i = 1; i <= totalPages; i++) {
+            pageNumbers.push(i);
+          }
+        } else {
+          let start = Math.max(currentPage - Math.floor(pageRange / 2), 1);
+          let end = Math.min(start + pageRange - 1, totalPages);
+    
+          if (end - start < pageRange - 1) {
+            start = Math.max(end - pageRange + 1, 1);
+          }
+    
+          for (let i = start; i <= end; i++) {
+            pageNumbers.push(i);
+          }
+    
+          if (start - 5 > 1 && start - 5 >= 1) {
+            pageNumbers.unshift("...");
+          }
+          for (let i = Math.min(start-1, 5); i >= 1; --i) {
+            pageNumbers.unshift(i);
+          }
+    
+    
+          if (end < totalPages-4) {
+            pageNumbers.push("...");
+          }
+          if (currentPage < totalPages - 4) {
+            for (let i = totalPages-4; i <= Math.max(end, totalPages); ++i) {
+                pageNumbers.push(i);
+              }
+          }
 
-  const visiblePages = useMemo(() => {
-    const pageNumbers = [];
+    
+        }
+    
+        return pageNumbers;
+      }, [totalPages, currentPage]);
 
-    debugger;
-    if (totalPages <= pageRange) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-      }
-    } else {
-      let start = Math.max(currentPage - Math.floor(pageRange / 2), 1);
-      let end = Math.min(start + pageRange - 1, totalPages);
+    return (
+        <div className='pagination'>
 
-      if (end - start < pageRange - 1) {
-        start = Math.max(end - pageRange + 1, 1);
-      }
+            {/* <Button className='floating' disabled={isFirstPage} onClick={() => setPage(1)}>First</Button>
+            <Button className='floating' disabled={isFirstPage} onClick={() => goToPrevPage()}>Prev</Button>
 
-      for (let i = start; i <= end; i++) {
-        pageNumbers.push(i);
-      }
+            <span className='floating'>
+                Page <input onChange={(event) => debounceOnChange(Number(event.target.value))} type="number" className='page-input' defaultValue={currentPage} /> of <strong>{totalPages}</strong>
+            </span>
 
-      if (start - 5 > 1 && start - 5 >= 1) {
-        pageNumbers.unshift("...");
-      }
-      for (let i = Math.min(start-1, 5); i >= 1; --i) {
-        pageNumbers.unshift(i);
-      }
+            <Button className='floating' disabled={isLastPage} onClick={() => goToNextPage()}>Next</Button>
+            <Button className='floating' disabled={isLastPage} onClick={() => setPage(totalPages)}>Last</Button> */}
 
+        <Button className='floating' disabled={isFirstPage} onClick={() => setPage(1)}>First</Button>
 
-      if (end < totalPages-4) {
-        pageNumbers.push("...");
-        // pageNumbers.push(totalPages-4);
-        // pageNumbers.push(totalPages-3);
-        // pageNumbers.push(totalPages-2);
-        // pageNumbers.push(totalPages-1);
-        // pageNumbers.push(totalPages);
-      }
-
-      for (let i = totalPages-4; i <= Math.max(end, totalPages); ++i) {
-        pageNumbers.push(i);
-      }
-
-    }
-
-    return pageNumbers;
-  }, [totalPages, currentPage]);
-
-  return (
-    <div className="pagination">
-      {/* <button
-        className="floating"
-        disabled={isFirstPage}
-        onClick={() => setPage(1)}
-      >
-        1
-      </button> */}
-
-      {visiblePages.map((page, index) => (
+        {listOfPages.map((page, index) => (
         <React.Fragment key={index}>
-          
+
             <Button
               variant={page === currentPage ? "contained" : "outlined"}
               disabled={page==="..."}
@@ -114,17 +111,13 @@ export const Paginator = ({
             >
               {page}
             </Button>
-          
+
         </React.Fragment>
       ))}
 
-      {/* <button
-        className="floating"
-        disabled={isLastPage}
-        onClick={() => setPage(totalPages)}
-      >
-        {totalPages}
-      </button> */}
-    </div>
-  );
-};
+        <Button className='floating' disabled={isLastPage} onClick={() => setPage(totalPages)}>Last</Button>
+
+            
+        </div >
+    )
+}

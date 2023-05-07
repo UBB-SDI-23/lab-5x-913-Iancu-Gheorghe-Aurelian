@@ -16,4 +16,5 @@ public class ShelterDTOWithVolunteering{
         String city;
         Integer hoursPerWeek;
         String role;
+        String description;
 }

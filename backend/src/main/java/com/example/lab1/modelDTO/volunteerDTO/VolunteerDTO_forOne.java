@@ -16,6 +16,6 @@ public class VolunteerDTO_forOne {
     String lastName;
     String email;
     Long phone;
-    String nationality;
+    String country;
     private Set<ShelterDTOWithVolunteering> shelters;
 }

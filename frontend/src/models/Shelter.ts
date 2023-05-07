@@ -7,5 +7,6 @@ export interface Shelter{
     numberOfVolunteers: number;
     capacity: number;
     city: string;
+    description: string;
     animals ?: Animal[];
 }
